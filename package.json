@@ -28,6 +28,7 @@
   },
   "type": "module",
   "dependencies": {
+    "canvas": "^2.8.0",
     "jsdom": "^19.0.0"
   }
 }
