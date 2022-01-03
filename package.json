@@ -17,7 +17,6 @@
     "@sveltejs/kit": "next",
     "cheerio": "^1.0.0-rc.10",
     "domino": "^2.1.6",
-    "jsdom": "^19.0.0",
     "prettier": "^2.4.1",
     "prettier-plugin-svelte": "^2.4.0",
     "read-art": "^0.5.6",
@@ -27,5 +26,8 @@
     "tslib": "^2.3.1",
     "typescript": "^4.4.3"
   },
-  "type": "module"
+  "type": "module",
+  "dependencies": {
+    "jsdom": "^19.0.0"
+  }
 }
