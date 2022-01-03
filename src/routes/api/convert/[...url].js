@@ -1,24 +1,28 @@
+import { getCache, setCache } from '$lib/upstash'
 import { Readability } from '@mozilla/readability'
-// import { JSDOM } from 'jsdom';
-import {parseHTML} from 'linkedom';
+import { JSDOM } from 'jsdom';
 
 export async function get({ params }) {
-	const url = /https?/.test(params.url) ? params.url : `http://${params.url}`
-	const res = await fetch(url)
+	let {url} = params
+
+	let { data: article } = await getCache(url)
+	if (!!article) return {
+		body: JSON.parse(article)
+	}
+
+	const fullUrl = /^http?/.test(url) ? url : `http://${url}`
+	const res = await fetch( fullUrl )
 
 	if (!res.ok) return null
 
 	const html = await res.text()
 
-	// const doc = new JSDOM( html, { url });
-	const { document } = parseHTML( html );
-	console.log(document)
-	const reader = new Readability( document );
-	const article = reader.parse();
+	const dom = new JSDOM( html, { url: fullUrl });
+	const reader = new Readability( dom.window.document );
+	article = reader.parse();
 
-	const { document: articleDoc } = parseHTML( article.content );
-	// const { window: { document } } = new JSDOM(article.content, { url });
-	const nodes = domToNode( articleDoc.querySelector('.page') ).children
+	const { window: { document } } = new JSDOM(article.content, { url: fullUrl });
+	const nodes = domToNode( document.querySelector('.page') ).children
 
 	const resPost =  await fetch('https://api.telegra.ph/createPage',{
 		method: 'POST',
@@ -30,10 +34,14 @@ export async function get({ params }) {
 			content: nodes
 		}),
 	})
-	const post = await resPost.json()
+	const {result} = await resPost.json()
+	const resSet = await setCache(url,JSON.stringify(result))
 
 	return {
-		body: post
+		header: {
+			'Cache-Control': 'public, immutable, no-transform, s-maxage=31536000, max-age=31536000'
+		},		
+		body: result
 	}
 }
 
