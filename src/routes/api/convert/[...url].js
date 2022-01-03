@@ -9,7 +9,7 @@ export async function get({ params }) {
 
 	const html = await res.text()
 
-	const doc = new JSDOM(html, { url });
+	const doc = new JSDOM( html, { url });
 	const reader = new Readability( doc.window.document );
 	const article = reader.parse();
 
