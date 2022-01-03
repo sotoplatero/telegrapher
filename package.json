@@ -16,6 +16,8 @@
     "@sveltejs/adapter-auto": "next",
     "@sveltejs/kit": "next",
     "cheerio": "^1.0.0-rc.10",
+    "hyperhtml": "^2.34.0",
+    "linkedom": "^0.13.0",
     "prettier": "^2.4.1",
     "prettier-plugin-svelte": "^2.4.0",
     "svelte": "^3.44.0",

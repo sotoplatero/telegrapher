@@ -5,7 +5,9 @@ specifiers:
   '@sveltejs/adapter-auto': next
   '@sveltejs/kit': next
   cheerio: ^1.0.0-rc.10
+  hyperhtml: ^2.34.0
   jsdom: ^19.0.0
+  linkedom: ^0.13.0
   prettier: ^2.4.1
   prettier-plugin-svelte: ^2.4.0
   svelte: ^3.44.0
@@ -22,6 +24,8 @@ devDependencies:
   '@sveltejs/adapter-auto': 1.0.0-next.7
   '@sveltejs/kit': 1.0.0-next.215_svelte@3.44.3
   cheerio: 1.0.0-rc.10
+  hyperhtml: 2.34.0
+  linkedom: 0.13.0
   prettier: 2.5.1
   prettier-plugin-svelte: 2.5.1_prettier@2.5.1+svelte@3.44.3
   svelte: 3.44.3
@@ -157,6 +161,50 @@ packages:
     resolution: {integrity: sha512-BPdoIt1lfJ6B7rw35ncdwBZrAssjcwzI5LByIrYs+tpXlj/CAkuVdRsgZDdP4lq5EjyWzwxZCqAoFyHKFwp32g==}
     dependencies:
       '@types/node': 17.0.6
+    dev: true
+
+  /@ungap/create-content/0.2.0:
+    resolution: {integrity: sha512-CvmX0Mr5PfFARDBbSef0B+SAqSeMKaHOG/twJi9nbPtp/MiNPgyBLqZndiyO3RXQ0RXy6TqwarvB6KWzTmc4MQ==}
+    dev: true
+
+  /@ungap/custom-event/0.3.1:
+    resolution: {integrity: sha512-6iFFSuCelNPovoqS53N6f2ohbILf5qqk1YPLgcs67rOTfUlkOJs7xWcX0ygk/iWEmCWkC38+bRNTzjM02eP8iw==}
+    dev: true
+
+  /@ungap/essential-map/0.3.2:
+    resolution: {integrity: sha512-3nKB3JV6GXjWfdRPvx1V8KQsyEtdYf9jmrpXu8U8G4RV4EzYWHcYVPHthiN+eYhtCXB7Qrzu+CPxHKPn8WBJ0Q==}
+    dev: true
+
+  /@ungap/essential-weakset/0.2.1:
+    resolution: {integrity: sha512-h5HsksOZ7KDYqr+oMtAIR3ZQgaEbbSD6p4tVqaM1jCzWhbXkW6X6RpwfLQLqjfrRNTRqQtcwfsdwQMrpWbdp5A==}
+    dev: true
+
+  /@ungap/import-node/0.2.0:
+    resolution: {integrity: sha512-VuWVBAMRjoOc63n8Cc19brS7KlhYJ+57790LF+lVw60nMRemCrz1T6HnoNx74IEW3FS+TM+vveJ70C6NyTKODQ==}
+    dev: true
+
+  /@ungap/is-array/0.2.0:
+    resolution: {integrity: sha512-585x6xT7DmZDWzSog3ZEGJryN175zxPRQh8JvEqItlhOowGYU4xcv6qh/8623doCYI7vohJc/0R5OO2EqrV3+w==}
+    dev: true
+
+  /@ungap/template-literal/0.6.0:
+    resolution: {integrity: sha512-J8+vZofH0TWM8M0ZU8qN/3fl6ct5mrB82+OSLSYXYZI0abi8a0FYPC65YViU1D2gRHdHQ7zXSv+LJiTM212rDw==}
+    dependencies:
+      '@ungap/weakmap': 0.2.1
+    dev: true
+
+  /@ungap/template-tag-arguments/0.5.0:
+    resolution: {integrity: sha512-hyvUZuGy60qOLdg95BjxgwehbJ4UoIG+sAj7yie9coxeK/qLIcwKXp8cn2Cwm3ouLB9UKL2v/+eq9oRUjuBPJg==}
+    dependencies:
+      '@ungap/template-literal': 0.6.0
+    dev: true
+
+  /@ungap/trim/0.2.0:
+    resolution: {integrity: sha512-CfsUxeZ2R/O3EGCOe+IkAU32yHOdO+mCRmtavSIQ4HZN3Jiq/ynGzq8/asyamd28U26UJmpSV/TC7+p7qELKrg==}
+    dev: true
+
+  /@ungap/weakmap/0.2.1:
+    resolution: {integrity: sha512-GmVAWB+JuFKqSbzlofYK4qxk955gEv4Kd9/aj2hLOxneXMAm/J7OXcl5DlElS9tmkqwCcxGysSZGOrjzNvmjFQ==}
     dev: true
 
   /abab/2.0.5:
@@ -344,7 +392,6 @@ packages:
 
   /cssom/0.5.0:
     resolution: {integrity: sha512-iKuQcq+NdHqlAcwUY0o/HL69XQrUaQdMjmStJ8JFmUaiiQErlhrmuigkg/CU4E2J0IyUKUrMAgl36TvN67MqTw==}
-    dev: false
 
   /cssstyle/2.3.0:
     resolution: {integrity: sha512-AZL67abkUzIuvcHqk7c09cezpGNcxUxU4Ioi/05xHk4DQeTkWmGYftIE6ctU6AEt+Gn4n1lDStOtj7FKycP71A==}
@@ -391,12 +438,26 @@ packages:
     engines: {node: '>=8'}
     dev: true
 
+  /disconnected/0.2.1:
+    resolution: {integrity: sha512-483TUpj4dA7Ye42xrErztbw3PKpkboPf1aB9mG4+S+RGGxFVv72hQBbS8MqN8LZLWHzfcmk2tMTRR5CoyxNglg==}
+    dev: true
+
   /dom-serializer/1.3.2:
     resolution: {integrity: sha512-5c54Bk5Dw4qAxNOI1pFEizPSjVsx5+bpJKmL2kPn8JhBUq2q09tTCa3mjijun2NfK78NMouDYNMBkOrPZiS+ig==}
     dependencies:
       domelementtype: 2.2.0
       domhandler: 4.3.0
       entities: 2.2.0
+    dev: true
+
+  /domconstants/0.1.2:
+    resolution: {integrity: sha512-sPOoOckTxtwy5t8PFf6zl11gOEhOpl1k0ZCc/NfCNmHoMw8n9HnCQCzxWKX9gdBp+qM+2DTFkst++Yw6C41izQ==}
+    dev: true
+
+  /domdiff/2.2.2:
+    resolution: {integrity: sha512-Pv7aH5JfjNIkLRKkah+T3Kd41Gy+7GU+5dmPsOZZXsCJ34QR1i7CCiWraUn1c/a40htShxAQ8mHJR2OqPd12+Q==}
+    dependencies:
+      uarray: 1.0.0
     dev: true
 
   /domelementtype/2.2.0:
@@ -417,6 +478,24 @@ packages:
       domelementtype: 2.2.0
     dev: true
 
+  /domsanitizer/0.2.3:
+    resolution: {integrity: sha512-qglHc+5k5C2+WSEzck0WGbpa2exCKZuZKb0n4RU2Wuy7BPkpmf67mHD1BJWGxs0iJYl709f2YVeJMh06c1ILlA==}
+    dependencies:
+      domconstants: 0.1.2
+    dev: true
+
+  /domtagger/0.7.0:
+    resolution: {integrity: sha512-ljf2FYn4DPbMP2RN2YD8VsuW1Rm5N7x3iV0QRmlu5JqoY6Zn/gcwI8j4NV91YOlmqIHzONA+TEFOWQ4oX89G4Q==}
+    dependencies:
+      '@ungap/create-content': 0.2.0
+      '@ungap/import-node': 0.2.0
+      '@ungap/trim': 0.2.0
+      '@ungap/weakmap': 0.2.1
+      domconstants: 0.1.2
+      domsanitizer: 0.2.3
+      umap: 1.0.2
+    dev: true
+
   /domutils/2.8.0:
     resolution: {integrity: sha512-w96Cjofp72M5IIhpjgobBimYEfoPjx1Vx0BSX9P30WBdZW2WIKU0T1Bd0kz2eNZ9ikjKgHbEyKx8BB6H1L3h3A==}
     dependencies:
@@ -427,6 +506,11 @@ packages:
 
   /entities/2.2.0:
     resolution: {integrity: sha512-p92if5Nz619I0w+akJrLZH0MX0Pb5DX39XOwQTtXSdQQOaYH03S1uIQp4mhOZtAXrxq4ViO67YTiLBo2638o9A==}
+    dev: true
+
+  /entities/3.0.1:
+    resolution: {integrity: sha512-WiyBqoomrwMdFG1e0kqvASYfnlb0lp8M5o5Fw2OFq1hNZxxcNk8Ik0Xm7LxzBhuidnZB/UtBqVCgUz3kBOP51Q==}
+    engines: {node: '>=0.12'}
     dev: true
 
   /es6-promise/3.3.1:
@@ -728,6 +812,10 @@ packages:
       whatwg-encoding: 2.0.0
     dev: false
 
+  /html-escaper/3.0.3:
+    resolution: {integrity: sha512-RuMffC89BOWQoY0WKGpIhn5gX3iI54O6nRA0yC124NYVtzjmFWBIiFd8M0x+ZdX0P9R4lADg1mgP8C7PxGOWuQ==}
+    dev: true
+
   /htmlparser2/6.1.0:
     resolution: {integrity: sha512-gyyPk6rgonLFEDGoeRgQNaEUvdJ4ktTmmUh/h2t7s+M8oPpIPxgNACWa+6ESR57kXstwqPiCut0V8NRpcwgU7A==}
     dependencies:
@@ -735,6 +823,15 @@ packages:
       domhandler: 4.3.0
       domutils: 2.8.0
       entities: 2.2.0
+    dev: true
+
+  /htmlparser2/7.2.0:
+    resolution: {integrity: sha512-H7MImA4MS6cw7nbyURtLPO1Tms7C5H602LRETv95z1MxO/7CP7rDVROehUYeYBUYEON94NXXDEPmZuq+hX4sog==}
+    dependencies:
+      domelementtype: 2.2.0
+      domhandler: 4.3.0
+      domutils: 2.8.0
+      entities: 3.0.1
     dev: true
 
   /http-proxy-agent/5.0.0:
@@ -757,6 +854,31 @@ packages:
     transitivePeerDependencies:
       - supports-color
     dev: false
+
+  /hyperhtml-style/0.1.2:
+    resolution: {integrity: sha512-ZDRYNClEaqUS0a8RAED0nQRqWmZk7ctdyij3Iw/PqUUef6xhYO87nx9vJNuxg7Yc6J2FdJjXRKbB0iud2ZyzwQ==}
+    dev: true
+
+  /hyperhtml-wire/2.1.1:
+    resolution: {integrity: sha512-6rOTnb+BSWIsNaqiji01BdV8qyhwyCT38aGmG5k37JQeI9n+lwgvFsq0/G7wNAh5NuGdAaWUl1umbjrW7fj++w==}
+    dev: true
+
+  /hyperhtml/2.34.0:
+    resolution: {integrity: sha512-3aUoh8Pc8b4V/ttqLMfCUdW5nr+sgaeuhI0Z0T1vnOdhbutc7aP2Xlj96FA/GLA2xdnGpBcBKV5IlwM4hLkl7g==}
+    dependencies:
+      '@ungap/create-content': 0.2.0
+      '@ungap/custom-event': 0.3.1
+      '@ungap/essential-map': 0.3.2
+      '@ungap/essential-weakset': 0.2.1
+      '@ungap/is-array': 0.2.0
+      '@ungap/template-tag-arguments': 0.5.0
+      '@ungap/weakmap': 0.2.1
+      disconnected: 0.2.1
+      domdiff: 2.2.2
+      domtagger: 0.7.0
+      hyperhtml-style: 0.1.2
+      hyperhtml-wire: 2.1.1
+    dev: true
 
   /iconv-lite/0.6.3:
     resolution: {integrity: sha512-4fCk79wshMdzMp2rH06qWrJE4iolqLhCUH+OiuIgU++RB0+94NlDL81atO7GX55uUKueo0txHNtvEyI6D7WdMw==}
@@ -872,6 +994,16 @@ packages:
       prelude-ls: 1.1.2
       type-check: 0.3.2
     dev: false
+
+  /linkedom/0.13.0:
+    resolution: {integrity: sha512-QwWqKvKeWKKQrmMX9JPGtCZ6gXatp1/eKoUPGx0CoXFL8iZAtc6+rMkz2zZuVSjJw7QCw1oj/VH978Zc6WQjfA==}
+    dependencies:
+      css-select: 4.2.1
+      cssom: 0.5.0
+      html-escaper: 3.0.3
+      htmlparser2: 7.2.0
+      uhyphen: 0.1.0
+    dev: true
 
   /magic-string/0.25.7:
     resolution: {integrity: sha512-4CrMT5DOHTDk4HYDlzmwu4FVCcIYI8gauveasrdCu2IKIFOJ3f0v/8MDGJCDL9oD2ppz/Av1b0Nj345H9M+XIA==}
@@ -1313,6 +1445,18 @@ packages:
     resolution: {integrity: sha512-VgYs2A2QIRuGphtzFV7aQJduJ2gyfTljngLzjpfW9FoYZF6xuw1W0vW9ghCKLfcWrCFxK81CSGRAvS1pn4fIUg==}
     engines: {node: '>=4.2.0'}
     hasBin: true
+    dev: true
+
+  /uarray/1.0.0:
+    resolution: {integrity: sha512-LHmiAd5QuAv7pU2vbh+Zq9YOnqVK0H764p2Ozinpfy9ka58OID4IsGLiXsitqH7n0NAIDxvax1A/kDXpii/Ckg==}
+    dev: true
+
+  /uhyphen/0.1.0:
+    resolution: {integrity: sha512-o0QVGuFg24FK765Qdd5kk0zU/U4dEsCtN/GSiwNI9i8xsSVtjIAOdTaVhLwZ1nrbWxFVMxNDDl+9fednsOMsBw==}
+    dev: true
+
+  /umap/1.0.2:
+    resolution: {integrity: sha512-bW127HgG4H4VAD6qlqO5vCC+7bnlYvZ6A6BdwyGblkWvlEG7VYpj1bcpf3iJpvyKmkPZWDIeZDmoULz67ec7NA==}
     dev: true
 
   /universalify/0.1.2:

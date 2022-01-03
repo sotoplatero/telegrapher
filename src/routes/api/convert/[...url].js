@@ -1,5 +1,6 @@
 import { Readability } from '@mozilla/readability'
-import { JSDOM } from 'jsdom';
+// import { JSDOM } from 'jsdom';
+import {parseHTML} from 'linkedom';
 
 export async function get({ params }) {
 	const url = /https?/.test(params.url) ? params.url : `http://${params.url}`
@@ -9,23 +10,25 @@ export async function get({ params }) {
 
 	const html = await res.text()
 
-	const doc = new JSDOM( html, { url });
-	const reader = new Readability( doc.window.document );
+	// const doc = new JSDOM( html, { url });
+	const { document } = parseHTML( html );
+	console.log(document)
+	const reader = new Readability( document );
 	const article = reader.parse();
 
-	const { window: { document } } = new JSDOM(article.content, { url });
-	const nodes = domToNode( document.querySelector('.page') ).children
-	const content = JSON.stringify(nodes)
-	const author_name = article.byline || article.siteName
-	const access_token = await createAccount(author_name)
-	const title = article.title
+	const { document: articleDoc } = parseHTML( article.content );
+	// const { window: { document } } = new JSDOM(article.content, { url });
+	const nodes = domToNode( articleDoc.querySelector('.page') ).children
 
 	const resPost =  await fetch('https://api.telegra.ph/createPage',{
 		method: 'POST',
-		body: JSON.stringify({	access_token, title, author_name, content }),
-	    headers: {
-	      'Content-Type': 'application/json'
-	    },		
+	    headers: { 'Content-Type': 'application/json' },		
+		body: JSON.stringify({	
+			access_token: await createAccount(article.byline || article.siteName), 
+			title: article.title, 
+			author_name: article.byline || article.siteName, 
+			content: nodes
+		}),
 	})
 	const post = await resPost.json()
 
