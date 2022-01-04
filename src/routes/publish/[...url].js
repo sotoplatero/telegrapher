@@ -4,7 +4,6 @@ import { Readability } from '@mozilla/readability'
 import { Window } from 'happy-dom';
 import cheerio from 'cheerio'; 
 
-
 export async function get({ params }) {
 	let {url} = params
 	const UPSTASH_REDIS_REST_URL =  import.meta.env.VITE_UPSTASH_REDIS_REST_URL
@@ -13,6 +12,7 @@ export async function get({ params }) {
 	try	{
 
 		auth(UPSTASH_REDIS_REST_URL, UPSTASH_REDIS_REST_TOKEN);	
+		// let article
 		let { data: article } = await getCache(url)
 		if (!!article) return {
 			body: JSON.parse(article)
@@ -27,23 +27,22 @@ export async function get({ params }) {
 		const $ = cheerio.load(html)
 
 		const doc = (new Window()).document;
-		// const doc = window.document
 
+		// Extract article from html
 		doc.body.innerHTML = $('body').html()
 		const reader = new Readability( doc );
 		article = reader.parse();
 
-		doc.body.innerHTML = article.content 
+		doc.body.innerHTML = article.content.replace(/\n|\t|\r/g,'') 
 		const nodes = domToNode( doc.querySelector('.page') ).children
 
-		console.log(article)
 		const resPost =  await fetch('https://api.telegra.ph/createPage',{
 			method: 'POST',
 		    headers: { 'Content-Type': 'application/json' },		
 				body: JSON.stringify({	
 					access_token: await createAccount(article.byline || article.siteName), 
 					title: article.title || $('title').text(), 
-					author_name: article.byline || article.siteName, 
+					author_name: article.byline || article.siteName || 'Telegrapher', 
 					content: nodes
 				}),
 		})
