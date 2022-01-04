@@ -5,14 +5,15 @@ import { JSDOM } from 'jsdom';
 
 const UPSTASH_REDIS_REST_URL =  import.meta.env.VITE_UPSTASH_REDIS_REST_URL
 const UPSTASH_REDIS_REST_TOKEN = import.meta.env.VITE_UPSTASH_REDIS_REST_TOKEN
-auth(UPSTASH_REDIS_REST_URL, UPSTASH_REDIS_REST_TOKEN);	
 
 export async function get({ params }) {
 	let {url} = params
 	try	{
+		console.log( UPSTASH_REDIS_REST_URL)
+		auth(UPSTASH_REDIS_REST_URL, UPSTASH_REDIS_REST_TOKEN);	
 		let { data: article } = await getCache(url)
 		if (!!article) return {
-			body: article
+			body: JSON.parse(article)
 		}
 
 		const fullUrl = /^http?/.test(url) ? url : `http://${url}`
