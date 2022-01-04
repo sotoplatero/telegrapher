@@ -5,7 +5,7 @@ import { JSDOM } from 'jsdom';
 export async function get({ params }) {
 	let {url} = params
 	try	{
-
+		console.log(getCache)
 		let { data: article } = await getCache(url)
 		if (!!article) return {
 			body: article
@@ -28,13 +28,14 @@ export async function get({ params }) {
 		const resPost =  await fetch('https://api.telegra.ph/createPage',{
 			method: 'POST',
 		    headers: { 'Content-Type': 'application/json' },		
-			body: JSON.stringify({	
-				access_token: await createAccount(article.byline || article.siteName), 
-				title: article.title, 
-				author_name: article.byline || article.siteName, 
-				content: nodes
-			}),
+				body: JSON.stringify({	
+					access_token: await createAccount(article.byline || article.siteName), 
+					title: article.title, 
+					author_name: article.byline || article.siteName, 
+					content: nodes
+				}),
 		})
+
 		const {result} = await resPost.json()
 		await setCache(url,result)
 
