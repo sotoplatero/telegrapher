@@ -17,7 +17,7 @@
 <div class="h-screen flex items-center justify-center px-2">
 	<div class="text-center">
 		<h1 class="text-8xl">{status}</h1>
-		<p class="text-3xl">{message}</p>
+		<p class="text-2xl">{message}</p>
 		<p><a href="/">Home</a></p>
 	</div>
 </div>
