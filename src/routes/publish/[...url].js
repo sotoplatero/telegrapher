@@ -3,11 +3,11 @@ import { auth, set as setCache, get as getCache } from '@upstash/redis';
 import { Readability } from '@mozilla/readability'
 import { JSDOM } from 'jsdom'; 
 
-const UPSTASH_REDIS_REST_URL =  import.meta.env.VITE_UPSTASH_REDIS_REST_URL
-const UPSTASH_REDIS_REST_TOKEN = import.meta.env.VITE_UPSTASH_REDIS_REST_TOKEN
 
 export async function get({ params }) {
 	let {url} = params
+	const UPSTASH_REDIS_REST_URL =  import.meta.env.VITE_UPSTASH_REDIS_REST_URL
+	const UPSTASH_REDIS_REST_TOKEN = import.meta.env.VITE_UPSTASH_REDIS_REST_TOKEN
 	try	{
 		console.log( UPSTASH_REDIS_REST_URL)
 		auth(UPSTASH_REDIS_REST_URL, UPSTASH_REDIS_REST_TOKEN);	
