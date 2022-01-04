@@ -9,7 +9,7 @@
 		
 		<header class="text-center mb-10 px-4 sm:px-10">
 			<h1 class="text-xl sm:text-3xl uppercase font-light mb-4 text-gray-700">Telegrapher</h1>
-			<p class="text-2xl sm:text-5xl font-bold text-gray-800 leading-snug">Free and Automatically publish your blog posts for <a class="underline" href="https://telegra.ph" target="_blank">Telegra.ph</a></p>
+			<p class="text-2xl sm:text-5xl font-bold text-gray-800 leading-snug">Free and Automatically Publish your Blog Posts for <a class="underline" href="https://telegra.ph" target="_blank">Telegra.ph</a></p>
 		</header>
 
 		<div class="flex flex-col sm:flex-row items-center sm:space-x-3 space-x-0 space-y-3 sm:space-y-0 px-2 ">
