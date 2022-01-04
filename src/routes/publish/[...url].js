@@ -1,7 +1,6 @@
 // import { getCache, setCache } from '$lib/upstash'
 import { auth, set as setCache, get as getCache } from '@upstash/redis';
 import { Readability } from '@mozilla/readability'
-// import { JSDOM } from 'jsdom'; 
 import { Window } from 'happy-dom';
 import cheerio from 'cheerio'; 
 
@@ -27,22 +26,23 @@ export async function get({ params }) {
 		const html = await res.text()
 		const $ = cheerio.load(html)
 
-		const window = (new Window()).document;
-		const doc = window.document;
+		const doc = (new Window()).document;
+		// const doc = window.document
 
-		doc.write( $('body').html() )
+		doc.body.innerHTML = $('body').html()
 		const reader = new Readability( doc );
 		article = reader.parse();
 
-		doc.write( article.content )
+		doc.body.innerHTML = article.content 
 		const nodes = domToNode( doc.querySelector('.page') ).children
 
+		console.log(article)
 		const resPost =  await fetch('https://api.telegra.ph/createPage',{
 			method: 'POST',
 		    headers: { 'Content-Type': 'application/json' },		
 				body: JSON.stringify({	
 					access_token: await createAccount(article.byline || article.siteName), 
-					title: article.title, 
+					title: article.title || $('title').text(), 
 					author_name: article.byline || article.siteName, 
 					content: nodes
 				}),
@@ -66,7 +66,7 @@ export async function get({ params }) {
 
 function domToNode(domNode) {
   if (domNode.nodeType == 3  ) { // TEXT_NODE
-    return domNode.data?.trim();
+    return domNode.data;
   }
 
   if (domNode.nodeType != 1) { //ELEMENT_NODE 
