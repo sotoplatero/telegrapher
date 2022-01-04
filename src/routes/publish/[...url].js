@@ -8,7 +8,7 @@ export async function get({ params }) {
 
 		let { data: article } = await getCache(url)
 		if (!!article) return {
-			body: JSON.parse(article)
+			body: article
 		}
 
 		const fullUrl = /^http?/.test(url) ? url : `http://${url}`
@@ -36,7 +36,7 @@ export async function get({ params }) {
 			}),
 		})
 		const {result} = await resPost.json()
-		const resSet = await setCache(url,JSON.stringify(result))
+		await setCache(url,result)
 
 		return {
 			header: {

@@ -5,5 +5,5 @@ const UPSTASH_REDIS_REST_TOKEN = import.meta.env.VITE_UPSTASH_REDIS_REST_TOKEN
 
 auth(UPSTASH_REDIS_REST_URL, UPSTASH_REDIS_REST_TOKEN);	
 
-export const setCache = set()
-export const getCache = get()
+export const setCache = (key, value) => set(key,JSON.stringify(value))
+export const getCache = (key) => get(key)
