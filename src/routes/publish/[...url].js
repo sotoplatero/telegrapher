@@ -1,7 +1,9 @@
 // import { getCache, setCache } from '$lib/upstash'
 import { auth, set as setCache, get as getCache } from '@upstash/redis';
 import { Readability } from '@mozilla/readability'
-import { JSDOM } from 'jsdom'; 
+// import { JSDOM } from 'jsdom'; 
+import { Window } from 'happy-dom';
+import cheerio from 'cheerio'; 
 
 
 export async function get({ params }) {
@@ -10,7 +12,7 @@ export async function get({ params }) {
 	const UPSTASH_REDIS_REST_TOKEN = import.meta.env.VITE_UPSTASH_REDIS_REST_TOKEN
 
 	try	{
-		
+
 		auth(UPSTASH_REDIS_REST_URL, UPSTASH_REDIS_REST_TOKEN);	
 		let { data: article } = await getCache(url)
 		if (!!article) return {
@@ -23,13 +25,17 @@ export async function get({ params }) {
 		if (!res.ok) return null
 
 		const html = await res.text()
+		const $ = cheerio.load(html)
 
-		const dom = new JSDOM( html, { url: fullUrl });
-		const reader = new Readability( dom.window.document );
+		const window = (new Window()).document;
+		const doc = window.document;
+
+		doc.write( $('body').html() )
+		const reader = new Readability( doc );
 		article = reader.parse();
 
-		const { window: { document } } = new JSDOM(article.content, { url: fullUrl });
-		const nodes = domToNode( document.querySelector('.page') ).children
+		doc.write( article.content )
+		const nodes = domToNode( doc.querySelector('.page') ).children
 
 		const resPost =  await fetch('https://api.telegra.ph/createPage',{
 			method: 'POST',

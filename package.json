@@ -20,6 +20,8 @@
 		"autoprefixer": "^10.4.1",
 		"canvas": "link:canvas",
 		"cheerio": "^1.0.0-rc.10",
+		"happy-dom": "^2.25.1",
+		"linkedom": "^0.13.0",
 		"postcss": "^8.4.5",
 		"prettier": "^2.5.1",
 		"prettier-plugin-svelte": "^2.5.1",

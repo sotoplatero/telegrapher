@@ -1,0 +1,1 @@
+import{S as n,i as o,s as u}from"../../chunks/vendor-7e8ed520.js";async function l({params:t,fetch:s}){const r=await s(`/publish/${t.url}`);if(r.ok){const e=await r.json();return{status:301,redirect:e.url}}return{status:r.status,error:new Error(`Could not load ${t.url}`)}}class i extends n{constructor(s){super();o(this,s,null,null,u,{})}}export{i as default,l as load};
