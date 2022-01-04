@@ -1,7 +1,7 @@
 <script>
     import { dev } from '$app/env';		
 	import '../app.postcss';
-	let title = 'Telegrapher - Free and Automatically Publish your Blog Posts for Telegraph'
+	let title = 'Telegrapher - Publish your blog posts on Telegra.ph'
 	let url = 'https://telegrapher.vercel.app'
 	let image = 'https://mugshotbot.com/m/Yc8vw3HS'
 </script>
