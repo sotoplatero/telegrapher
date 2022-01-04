@@ -3,6 +3,7 @@ lockfileVersion: 5.3
 specifiers:
   '@mozilla/readability': ^0.4.1
   '@sveltejs/adapter-auto': next
+  '@sveltejs/adapter-vercel': next
   '@sveltejs/kit': next
   '@upstash/redis': ^0.2.1
   autoprefixer: ^10.4.1
@@ -22,6 +23,7 @@ specifiers:
 devDependencies:
   '@mozilla/readability': 0.4.1
   '@sveltejs/adapter-auto': 1.0.0-next.8
+  '@sveltejs/adapter-vercel': 1.0.0-next.35
   '@sveltejs/kit': 1.0.0-next.216_svelte@3.44.3
   '@upstash/redis': 0.2.1
   autoprefixer: 10.4.1_postcss@8.4.5
