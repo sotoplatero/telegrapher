@@ -4,44 +4,49 @@ import { JSDOM } from 'jsdom';
 
 export async function get({ params }) {
 	let {url} = params
+	try	{
 
-	let { data: article } = await getCache(url)
-	if (!!article) return {
-		body: JSON.parse(article)
-	}
+		let { data: article } = await getCache(url)
+		if (!!article) return {
+			body: JSON.parse(article)
+		}
 
-	const fullUrl = /^http?/.test(url) ? url : `http://${url}`
-	const res = await fetch( fullUrl )
+		const fullUrl = /^http?/.test(url) ? url : `http://${url}`
+		const res = await fetch( fullUrl )
 
-	if (!res.ok) return null
+		if (!res.ok) return null
 
-	const html = await res.text()
+		const html = await res.text()
 
-	const dom = new JSDOM( html, { url: fullUrl });
-	const reader = new Readability( dom.window.document );
-	article = reader.parse();
+		const dom = new JSDOM( html, { url: fullUrl });
+		const reader = new Readability( dom.window.document );
+		article = reader.parse();
 
-	const { window: { document } } = new JSDOM(article.content, { url: fullUrl });
-	const nodes = domToNode( document.querySelector('.page') ).children
+		const { window: { document } } = new JSDOM(article.content, { url: fullUrl });
+		const nodes = domToNode( document.querySelector('.page') ).children
 
-	const resPost =  await fetch('https://api.telegra.ph/createPage',{
-		method: 'POST',
-	    headers: { 'Content-Type': 'application/json' },		
-		body: JSON.stringify({	
-			access_token: await createAccount(article.byline || article.siteName), 
-			title: article.title, 
-			author_name: article.byline || article.siteName, 
-			content: nodes
-		}),
-	})
-	const {result} = await resPost.json()
-	const resSet = await setCache(url,JSON.stringify(result))
+		const resPost =  await fetch('https://api.telegra.ph/createPage',{
+			method: 'POST',
+		    headers: { 'Content-Type': 'application/json' },		
+			body: JSON.stringify({	
+				access_token: await createAccount(article.byline || article.siteName), 
+				title: article.title, 
+				author_name: article.byline || article.siteName, 
+				content: nodes
+			}),
+		})
+		const {result} = await resPost.json()
+		const resSet = await setCache(url,JSON.stringify(result))
 
-	return {
-		header: {
-			'Cache-Control': 'public, immutable, no-transform, s-maxage=31536000, max-age=31536000'
-		},		
-		body: result
+		return {
+			header: {
+				'Cache-Control': 'public, immutable, no-transform, s-maxage=31536000, max-age=31536000'
+			},		
+			body: result
+		}
+	} catch(e) {
+		console.log(e)
+		return { status: 404 }
 	}
 }
 

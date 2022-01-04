@@ -2,10 +2,18 @@
 	/** @type {import('@sveltejs/kit').Load} */
 	export async function load({ params, fetch}) {
 		const res = await fetch(`/api/convert/${params.url}`);
-		const article = await res.json()
+
+		if (res.ok) {
+			const article = await res.json()
+			return {
+				status: 301,
+				redirect: article.url
+			}
+		}
+
 		return {
-			status: 301,
-			redirect: article.url
+			status: res.status,
+			error: new Error(`Could not load ${params.url}`)			
 		}
 
 	}
