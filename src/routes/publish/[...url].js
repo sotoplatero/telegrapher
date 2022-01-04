@@ -1,11 +1,15 @@
-import { getCache, setCache } from '$lib/upstash'
+// import { getCache, setCache } from '$lib/upstash'
+import { auth, set as setCache, get as getCache } from '@upstash/redis';
 import { Readability } from '@mozilla/readability'
 import { JSDOM } from 'jsdom';
+
+const UPSTASH_REDIS_REST_URL =  import.meta.env.VITE_UPSTASH_REDIS_REST_URL
+const UPSTASH_REDIS_REST_TOKEN = import.meta.env.VITE_UPSTASH_REDIS_REST_TOKEN
+auth(UPSTASH_REDIS_REST_URL, UPSTASH_REDIS_REST_TOKEN);	
 
 export async function get({ params }) {
 	let {url} = params
 	try	{
-		console.log(getCache)
 		let { data: article } = await getCache(url)
 		if (!!article) return {
 			body: article
@@ -82,7 +86,7 @@ function domToNode(domNode) {
     for (var i = 0; i < domNode.childNodes.length; i++) {
       	var child = domNode.childNodes[i];
     	childContent = domToNode(child)
-      	if (!!childContent) {
+      	if ( !!childContent ) {
 	      	nodeElement.children.push(childContent);
       	}
     }
