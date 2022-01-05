@@ -41,7 +41,7 @@ export async function get({ params }) {
 		    headers: { 'Content-Type': 'application/json' },		
 				body: JSON.stringify({	
 					access_token: await createAccount(article.byline || article.siteName), 
-					title: article.title || $('title').text(), 
+					title: article.title || $('h1').text() || $('title').text(), 
 					author_name: article.byline || article.siteName || 'Telegrapher', 
 					content: nodes
 				}),

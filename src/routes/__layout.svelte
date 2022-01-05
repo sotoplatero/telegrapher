@@ -3,7 +3,7 @@
 	import '../app.postcss';
 	let title = 'Telegrapher - Publish your blog posts on Telegra.ph'
 	let url = 'https://telegrapher.vercel.app'
-	let image = 'https://mugshotbot.com/m/Yc8vw3HS'
+	let image = 'https://mugshotbot.com/m/HUmChqPr'
 </script>
 <svelte:head>
 	<title>{title}</title>
