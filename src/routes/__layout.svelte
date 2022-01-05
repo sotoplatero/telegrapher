@@ -4,14 +4,16 @@
 	let title = 'Telegrapher - Publish your blog posts on Telegra.ph'
 	let url = 'https://telegrapher.vercel.app'
 	let image = 'https://mugshotbot.com/m/HUmChqPr'
+	let description = 'Automatically publish your blog posts on telegraph for free'
 </script>
 <svelte:head>
 	<title>{title}</title>
+	<meta name="description" content="{description}" >	
 	<meta property="og:title" content="{title}">
-	<!-- <meta property="og:description" content="{description}"> -->
+	<meta property="og:description" content="{description}">
 	<meta property="og:image" content="{image}">
 	<meta property="og:url" content="{url}">	
-	<meta name="twitter:image" content="{image}">
+	<meta property="twitter:image" content="{image}">
 	<meta property="twitter:card" content="summary_large_image">
 	<link rel="canonical" href="{url}" />
 	{#if !dev }
