@@ -35,10 +35,8 @@
 				
 		</div>
 		<footer class="text-center mt-20">
-			<p>
-				Made by <a href="https://twitter.com/sotoplatero" class="text-blue-500">dSoto</a>
-			</p>
-			<p>Share with a <a href="https://twitter.com/intent/tweet?url=https%3A%2F%2Ftelegrapher.vercel.app&text=I%27m%20publishing%20my%20posts%20with%20Telegrapher" class="font-bold">Tweet</a>
+			<p>Made by <a href="https://twitter.com/sotoplatero" class="text-blue-500">dSoto</a></p>
+			<p><a href="https://twitter.com/intent/tweet?url=https%3A%2F%2Ftelegrapher.vercel.app&text=I%27m%20publishing%20my%20posts%20with%20Telegrapher" class="font-bold">Tweet it</a>
 			</p>
 				
 		</footer>
